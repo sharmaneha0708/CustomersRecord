@@ -1,0 +1,26 @@
+<div class="container" style="padding-top: 70px;">
+  <header class="mt-2">
+    <h3><span class="fa fa-user"></span>&nbsp;&nbsp;Customer Information</h3>
+  </header>
+      <div class="navbar">
+        <ul class="nav">
+          <li class="nav-item" >
+            <a routerLink="details" routerLinkActive="active"  style="cursor: pointer" class="text-appearance">
+              <span class="fa fa-list text-appearance"></span>&nbsp;&nbsp;Customer Details
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="" style="cursor: pointer" class="text-appearance"
+              ><span class="fa fa-edit text-appearance"></span>&nbsp;&nbsp;Edit
+              Customer</a
+            >
+          </li>
+        </ul>
+      </div>
+  <div class="container">
+    <router-outlet></router-outlet>
+    <br/>
+    <br/>
+    <a routerLink="/customers">View all Customers</a>
+  </div>
+</div>

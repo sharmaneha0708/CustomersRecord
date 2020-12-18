@@ -1,1 +1,45 @@
-<p>customers-card works!</p>
+<div class="container">
+  <div class="row card-container">
+    <div
+      class="col-sm-6 col-md-4 col-lg-3 mt-4"
+      *ngFor="let customer of customers;"
+    >
+      <div class="card">
+        <div class="card-header bg-dark">
+          <!-- <a [routerLink]="['/customers',customer.id,'details']" class="text-light">
+            {{ customer.firstName }} {{ customer.lastName }}
+          </a> -->
+          <a (click)="onCustomerClick(customer.id)" class="text-light">
+            {{ customer.firstName }} {{ customer.lastName }}
+          </a>
+           <a routerLink="">
+            <i title="Edit"
+               class="pull-right fa fa-edit text-light"></i>
+        </a>
+        </div>
+          <div class="card-body">
+            <div class="clearfix">
+              <div class="pull-left card-body-left w-50">
+                <a href="#" class="">
+                  <img
+                    src="assets/images/{{ customer.gender }}.svg"
+                    alt="{{ customer.gender }}"
+                    class="card-image"
+                    style="width: 6em;"
+                  />
+                </a>
+              </div>
+              <div class="pull-right card-body-right w-50">
+                <div class="card-body-content">
+                  {{ customer.city }}, {{ customer.state  }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="!customers.length">
+        No Records Found
+    </div>
+    </div>
+  </div>

@@ -8,17 +8,17 @@ import { CustomersRoutingModule } from './customers-routing.module';
 
 @NgModule({
   declarations: [
-    CustomersComponent,
-    CustomersCardComponent
+    // CustomersComponent,
+    // CustomersCardComponent,
+    CustomersRoutingModule.components
   ],
   imports: [
-    RouterModule,
     CommonModule,
     CustomersRoutingModule
   ],
-  exports: [
-    CustomersComponent,
-    CustomersCardComponent
-  ]
+  // exports: [
+  //   CustomersComponent,
+  //   CustomersCardComponent
+  // ]
 })
 export class CustomersModule {}
