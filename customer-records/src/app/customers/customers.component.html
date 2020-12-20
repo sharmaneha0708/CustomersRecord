@@ -1,4 +1,4 @@
-<div class="container" style="padding-top: 70px;">
+<div class="container" style="padding-top: 70px">
   <header class="mt-2">
     <h3><span class="fa fa-user space"></span>Customers</h3>
   </header>
@@ -6,45 +6,61 @@
     <div class="col-md-8">
       <div class="navbar">
         <ul class="nav">
-          <li class="nav-item" >
-            <a  (click)="changeDisplayMode(displayModeEnum.Card)" style="cursor: pointer" class="text-appearance">
-              <span class="fa fa-th text-appearance"></span>Card
-              View
+          <li class="nav-item">
+            <a
+              (click)="changeDisplayMode(displayModeEnum.Card)"
+              style="cursor: pointer;"
+              class="text-appearance"
+            >
+              <span class="fa fa-th text-appearance"></span>Card View
             </a>
           </li>
           <li class="nav-item">
-            <a routerLink="" style="cursor: pointer" class="text-appearance"
-              ><span class="fa fa-bars text-appearance"></span>List
-              View</a
+            <a (click)="changeDisplayMode(displayModeEnum.Grid)" style="cursor: pointer" class="text-appearance"
+            [class.active]="displayMode === displayModeEnum.Grid"
+              ><span class="fa fa-bars text-appearance"></span>List View</a
             >
           </li>
           <li class="nav-item">
-            <a routerLink="" style="cursor: pointer" class="text-appearance"
-              ><span class="fa fa-map-marker text-appearance"></span
-              >Map View</a
+            <a
+              (click)="loadMapComponent()"
+              style="cursor: pointer"
+              class="text-appearance"
+              ><span class="fa fa-map-marker text-appearance"></span>Map View</a
             >
           </li>
           <li class="nav-item">
-            <a routerLink="" style="cursor: pointer" class="text-appearance"
-              ><span class="fa fa-plus text-appearance"></span>New
-              User</a
+            <a routerLink="/new" style="cursor: pointer" class="text-appearance"
+              ><span class="fa fa-plus text-appearance"></span>New User</a
             >
           </li>
         </ul>
       </div>
     </div>
     <div class="col-md-4 input-group">
-      <input type="search" placeholder="Search" id="myInput"  class="navbar-right border-right-0 border">
+      <input
+        type="search"
+        placeholder="Search"
+        id="myInput"
+        class="navbar-right border-right-0 border"
+      />
       <span class="input-group-append">
-        <button class="btn btn-outline-secondary border-left-0 border" type="button">
-            <i class="fa fa-search"></i>
+        <button
+          class="btn btn-outline-secondary border-left-0 border"
+          type="button"
+        >
+          <i class="fa fa-search"></i>
         </button>
       </span>
     </div>
   </div>
-  <!-- <div class="col-md-12">
-    <router-outlet></router-outlet>
-  </div> -->
+<br/>
+
   <app-customers-card
-  [hidden]="displayMode !== displayModeEnum.Card"></app-customers-card>
+    [hidden]="displayMode !== displayModeEnum.Card"
+  ></app-customers-card>
+
+  <div [hidden]="displayMode !== displayModeEnum.Map">
+    <ng-container #mapContainer></ng-container>
+</div>
 </div>

@@ -1,20 +1,23 @@
-import { ElementRef } from '@angular/core';
-import { ViewChild } from '@angular/core';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CustomerService } from '../shared/customer.service';
+import { Component, ComponentFactoryResolver, ComponentRef, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 
 @Component({
   selector: 'app-customers',
   templateUrl: './customers.component.html',
-  styleUrls: ['./customers.component.css']
+  styleUrls: ['./customers.component.css'],
 })
 export class CustomersComponent implements OnInit {
+
   displayMode: DisplayModeEnum;
   displayModeEnum = DisplayModeEnum;
+  map: google.maps.Map;
 
-  constructor(private router: Router, private route: ActivatedRoute, private customerService: CustomerService) {
-   }
+  mapComponentRef: ComponentRef<any>;
+
+  @ViewChild('mapContainer', { read: ViewContainerRef })
+  private mapsViewContainerRef: ViewContainerRef;
+  constructor(
+    private componentFactoryResolver: ComponentFactoryResolver
+  ) {}
 
   ngOnInit(): void {
     this.displayMode = DisplayModeEnum.Card;
@@ -22,17 +25,23 @@ export class CustomersComponent implements OnInit {
 
   changeDisplayMode(mode: DisplayModeEnum) {
     this.displayMode = mode;
-}
-  onCustomersCard() {
-    this.router.navigate(['customers-card'], {relativeTo: this.route});
-    debugger;
   }
 
+  async loadMapComponent() {
+    this.changeDisplayMode(DisplayModeEnum.Map);
+    if (!this.mapsViewContainerRef.length) {
+      // Lazy load MapComponent
+    const { MapComponent } = await import('src/app/customers/map/map.component');
+    const component = this.componentFactoryResolver.resolveComponentFactory(MapComponent);
+    this.mapComponentRef = this.mapsViewContainerRef.createComponent(component);
+    this.mapComponentRef.instance.enabled = true;
+    }
+ }
 
 }
 
 enum DisplayModeEnum {
   Card = 0,
   Grid = 1,
-  Map = 2
+  Map = 2,
 }

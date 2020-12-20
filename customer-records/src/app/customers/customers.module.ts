@@ -5,12 +5,12 @@ import { RouterModule } from '@angular/router';
 import { CustomersComponent } from './customers.component';
 import { CustomersCardComponent } from './customers-card/customers-card.component';
 import { CustomersRoutingModule } from './customers-routing.module';
+import { MapComponent } from './map/map.component';
 
 @NgModule({
   declarations: [
-    // CustomersComponent,
-    // CustomersCardComponent,
-    CustomersRoutingModule.components
+    CustomersRoutingModule.components,
+    MapComponent
   ],
   imports: [
     CommonModule,

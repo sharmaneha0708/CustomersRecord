@@ -6,6 +6,9 @@ export class Customer {
   public city: string;
   public state: string;
   public address: string;
+  public latitude: number;
+  public longitude: number;
+
 
   constructor(
     firstName: string,
@@ -14,7 +17,9 @@ export class Customer {
     gender: string,
     city: string,
     state: string,
-    address: string
+    address: string,
+    latitude: number,
+    longitude: number
   ) {
     this.firstName = firstName;
     this.lastName = lastName;
@@ -23,5 +28,7 @@ export class Customer {
     this.city = city;
     this.state = state;
     this.address = address;
+    this.latitude = latitude;
+    this.longitude = longitude;
   }
 }
