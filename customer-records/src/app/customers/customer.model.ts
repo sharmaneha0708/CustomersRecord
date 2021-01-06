@@ -1,7 +1,7 @@
 export class Customer {
   public firstName: string;
   public lastName: string;
-  public id: number;
+  public id: string;
   public gender: string;
   public city: string;
   public state: string;
@@ -13,7 +13,7 @@ export class Customer {
   constructor(
     firstName: string,
     lastName: string,
-    id: number,
+    id: string,
     gender: string,
     city: string,
     state: string,

@@ -1,14 +1,23 @@
 
-.text-appearance {
-  margin-right: 0.4em;
-  color: grey;
-  font-size: 0.9em;
-  text-decoration: none;
-}
-
 .space {
   margin-right: 0.4em;
 }
 .nav li {
   margin-right: 0.8em;
+}
+.navbar .nav > li.nav-item > a {
+  color: grey;
+  font-weight:bold;
+  margin-right: 0.4em;
+}
+.navbar .nav li.nav-item a:hover, .navbar .nav li a:hover {
+  color: skyblue;
+}
+
+a:hover, a:focus {
+  text-decoration: none;
+}
+
+.navbar .nav > .nav-item > a.active {
+  color: black
 }

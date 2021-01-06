@@ -1,18 +1,15 @@
-<div class="container">
-  <div class="row card-container">
+<div class="container" *ngIf="customers">
+  <div class="row card-container" >
     <div
       class="col-sm-6 col-md-4 col-lg-3 mt-4"
       *ngFor="let customer of customers;"
     >
       <div class="card">
         <div class="card-header bg-dark">
-          <!-- <a [routerLink]="['/customers',customer.id,'details']" class="text-light">
-            {{ customer.firstName }} {{ customer.lastName }}
-          </a> -->
-          <a (click)="onCustomerClick(customer.id)" class="text-light">
+            <a [routerLink]="['/customers',customer.id,'details']" class="text-light">
             {{ customer.firstName }} {{ customer.lastName }}
           </a>
-           <a routerLink="">
+           <a [routerLink]="['/customers',customer.id,'edit']">
             <i title="Edit"
                class="pull-right fa fa-edit text-light"></i>
         </a>
@@ -38,8 +35,8 @@
           </div>
         </div>
       </div>
-      <div *ngIf="!customers.length">
-        No Records Found
     </div>
-    </div>
+    <div *ngIf="!customers.length">
+      No Records Found
+  </div>
   </div>

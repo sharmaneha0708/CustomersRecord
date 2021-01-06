@@ -1,6 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { CustomerService } from 'src/app/shared/customer.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { Customer } from '../customer.model';
 
 @Component({
@@ -9,17 +7,11 @@ import { Customer } from '../customer.model';
   styleUrls: ['./customers-card.component.css']
 })
 export class CustomersCardComponent implements OnInit {
-   customers: Customer[] ;
+   @Input() customers: Customer[] = [];
 
-
-  constructor(private customerService: CustomerService, private router: Router, private route: ActivatedRoute) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.customers = this.customerService.getCustomers();
-  }
-
-  onCustomerClick(id: number) {
-   this.router.navigate(['./', id, 'details'], {relativeTo: this.route});
   }
 
 }

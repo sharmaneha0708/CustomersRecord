@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginGuard } from '../login/login.guard.service';
 import { CustomerDetailsComponent } from './customer-details/customer-details.component';
+import { CustomerEditComponent } from './customer-edit/customer-edit.component';
 import { CustomerComponent } from './customer.component';
 
 const routes: Routes = [
@@ -9,6 +11,11 @@ const routes: Routes = [
     component: CustomerComponent,
     children: [
       { path: 'details', component: CustomerDetailsComponent},
+      {
+        path: 'edit',
+        component: CustomerEditComponent,
+        canActivate: [LoginGuard]
+      }
     ]
   },
 ];
@@ -18,6 +25,6 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 export class CustomerRoutingModule {
-  static components = [ CustomerComponent, CustomerDetailsComponent ];
+  static components = [ CustomerComponent, CustomerDetailsComponent, CustomerEditComponent ];
 
 }

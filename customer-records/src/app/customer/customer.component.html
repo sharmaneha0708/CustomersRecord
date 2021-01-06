@@ -2,21 +2,25 @@
   <header class="mt-2">
     <h3><span class="fa fa-user"></span>&nbsp;&nbsp;Customer Information</h3>
   </header>
+  <div class="row">
+    <div class="col-md-12">
       <div class="navbar">
         <ul class="nav">
-          <li class="nav-item" >
-            <a routerLink="details" routerLinkActive="active"  style="cursor: pointer" class="text-appearance">
-              <span class="fa fa-list text-appearance"></span>&nbsp;&nbsp;Customer Details
+          <li class="nav-item pr-2" >
+            <a routerLink="details"   routerLinkActive="active" style="cursor: pointer">
+              <span class="fa fa-list"></span>&nbsp;&nbsp;Customer Details
             </a>
           </li>
-          <li class="nav-item">
-            <a routerLink="" style="cursor: pointer" class="text-appearance"
-              ><span class="fa fa-edit text-appearance"></span>&nbsp;&nbsp;Edit
+          <li class="nav-item pr-2" >
+            <a routerLink="edit"  routerLinkActive="active" style="cursor: pointer"
+              ><span class="fa fa-edit"></span>&nbsp;&nbsp;Edit
               Customer</a
             >
           </li>
         </ul>
       </div>
+      </div>
+  </div>
   <div class="container">
     <router-outlet></router-outlet>
     <br/>

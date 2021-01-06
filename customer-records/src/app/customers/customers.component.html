@@ -5,33 +5,35 @@
   <div class="row">
     <div class="col-md-8">
       <div class="navbar">
-        <ul class="nav">
+        <ul class="nav" *ngIf="customers">
           <li class="nav-item">
             <a
               (click)="changeDisplayMode(displayModeEnum.Card)"
-              style="cursor: pointer;"
-              class="text-appearance"
+              style="cursor: pointer"
+              [class.active]="displayMode === displayModeEnum.Card"
             >
-              <span class="fa fa-th text-appearance"></span>Card View
+              <span class="fa fa-th mr-1"></span>Card View
             </a>
           </li>
           <li class="nav-item">
-            <a (click)="changeDisplayMode(displayModeEnum.Grid)" style="cursor: pointer" class="text-appearance"
-            [class.active]="displayMode === displayModeEnum.Grid"
-              ><span class="fa fa-bars text-appearance"></span>List View</a
+            <a
+              (click)="changeDisplayMode(displayModeEnum.List)"
+              style="cursor: pointer"
+              [class.active]="displayMode === displayModeEnum.List"
+              ><span class="fa fa-bars mr-1"></span>List View</a
             >
           </li>
           <li class="nav-item">
             <a
               (click)="loadMapComponent()"
               style="cursor: pointer"
-              class="text-appearance"
-              ><span class="fa fa-map-marker text-appearance"></span>Map View</a
+              [class.active]="displayMode === displayModeEnum.Map"
+              ><span class="fa fa-map-marker mr-1"></span>Map View</a
             >
           </li>
           <li class="nav-item">
-            <a routerLink="/new" style="cursor: pointer" class="text-appearance"
-              ><span class="fa fa-plus text-appearance"></span>New User</a
+            <a [routerLink]="['/customers',null,'edit']" style="cursor: pointer"
+              ><span class="fa fa-plus mr-1"></span>New User</a
             >
           </li>
         </ul>
@@ -43,6 +45,7 @@
         placeholder="Search"
         id="myInput"
         class="navbar-right border-right-0 border"
+        [(ngModel)]="searchText"
       />
       <span class="input-group-append">
         <button
@@ -54,13 +57,20 @@
       </span>
     </div>
   </div>
-<br/>
+  <br />
 
   <app-customers-card
+  [customers]="customers"
     [hidden]="displayMode !== displayModeEnum.Card"
   ></app-customers-card>
+  <app-customers-list
+  [customers]="customers"
 
-  <div [hidden]="displayMode !== displayModeEnum.Map">
-    <ng-container #mapContainer></ng-container>
-</div>
+    [hidden]="displayMode !== displayModeEnum.List"
+  ></app-customers-list>
+  <div
+
+  [hidden]="displayMode !== displayModeEnum.Map">
+    <ng-container #mapContainer ></ng-container>
+  </div>
 </div>

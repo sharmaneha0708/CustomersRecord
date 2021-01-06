@@ -1,6 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CustomerService } from 'src/app/shared/customer.service';
 import { Customer } from '../customer.model';
 
 @Component({
@@ -9,7 +8,6 @@ import { Customer } from '../customer.model';
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
-  customers: Customer[] = [];
   map: google.maps.Map;
   mapHeight: string;
   mapWidth: string;
@@ -21,7 +19,7 @@ export class MapComponent implements OnInit {
 
   @ViewChild('mapContainer', { static: true }) gmap: ElementRef;
 
-  constructor(private customerService: CustomerService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute, private router: Router) { }
 
   // Necessary since a map rendered while container is hidden
   // will not load the map tiles properly and show a grey screen
@@ -33,6 +31,14 @@ export class MapComponent implements OnInit {
     this.isEnabled = isEnabled;
     this.init();
   }
+  private _customers: Customer[] = null;
+  @Input() public get customers() {
+    return this._customers;
+  }
+
+  public set customers(value: any[]) {
+    this._customers = value;
+  }
 
   init() {
     // Need slight delay to avoid grey box when google script has previously been loaded.
@@ -43,7 +49,6 @@ export class MapComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.customers = this.customerService.getCustomers();
     if (this.customers[0].latitude && this.customers[0].longitude) {
       if (this.mapHeight && this.mapWidth) {
         this.mapHeight = this.height + 'px';

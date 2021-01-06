@@ -1,0 +1,46 @@
+<app-alert *ngIf="alertMessage" [message] = "alertMessage" (close) = "dismissAlert()"></app-alert>
+<form #f="ngForm" (ngSubmit)="onSubmit()" novalidate *ngIf="customer">
+    <div class="form-group col-lg-8">
+      <label for="firstName">First Name</label>
+      <input type="text" class="form-control" name="firstName" [(ngModel)]="customer.firstName" required>
+    </div>
+    <div class="form-group col-lg-8">
+      <label for="lastName">Last Name</label>
+      <input type="text" id="lastName" name="lastName" class="form-control" [(ngModel)]="customer.lastName" required>
+    </div>
+    <div class="form-group col-lg-8">Gender
+      <div class="row ml-1 mt-2">
+        <div class="custom-control custom-radio custom-control-inline">
+          <input id="male" type="radio" class="custom-control-input" value="male" name="gender" [(ngModel)]="customer.gender" required>
+          <label class="custom-control-label" for="male">Male</label>
+        </div>
+        <div class="custom-control custom-radio custom-control-inline ml-3">
+          <input id="female" type="radio" class="custom-control-input" value="female" name="gender" [(ngModel)]="customer.gender" required>
+          <label class="custom-control-label" for="female">Female</label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group col-lg-8">
+      <label for="address">Address</label>
+      <input type="text" id="address" name="address" class="form-control" [(ngModel)]="customer.address">
+    </div>
+    <div class="form-group col-lg-8">
+      <label for="city">City</label>
+      <input type="text" id="city" name="city" class="form-control" [(ngModel)]="customer.city">
+    </div>
+    <div class="form-group col-lg-8">
+      <label for="state">State</label>
+      <input type="text" id="state" name="state" class="form-control" [(ngModel)]="customer.state">
+    </div>
+    <div class="row">
+      <div class="form-group col-lg-8">
+        <button type="button" class="btn btn-danger ml-3" *ngIf="editMode" (click)="onDelete()">Delete</button>
+        <div class="pull-right">
+      <button type="button" class="btn btn-default border border-secondary mr-2" (click)="onCancel()">Cancel</button>
+      <button type="submit" class="btn btn-success mr-1" [disabled]="!f.valid || f.pristine">{{ editMode ? 'Update' : 'Add' }}</button>
+    </div>
+      </div>
+    </div>
+  </form>
+
+

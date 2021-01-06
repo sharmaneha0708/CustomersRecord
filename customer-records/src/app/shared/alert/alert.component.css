@@ -1,0 +1,22 @@
+
+.alert-box {
+  position: fixed;
+  top: 50%;
+  left: 30%;
+  width: 30%;
+  padding: 16px;
+  z-index: 100;
+  background: #632d5036;
+  box-shadow: 0 2px 8px rbga(0, 0, 0, 0.26);
+}
+
+.alert-box-actions {
+  text-align: right;
+}
+
+.close-button {
+  position: absolute;
+  right: 3px;
+  top: 0;
+  color: grey;
+}
