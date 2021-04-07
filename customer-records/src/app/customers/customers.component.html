@@ -3,7 +3,7 @@
     <h3><span class="fa fa-user space"></span>Customers</h3>
   </header>
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-9">
       <div class="navbar">
         <ul class="nav" *ngIf="customers">
           <li class="nav-item">
@@ -39,23 +39,21 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-4 input-group">
-      <input
-        type="search"
-        placeholder="Search"
-        id="myInput"
-        class="navbar-right border-right-0 border"
-        [(ngModel)]="searchText"
-      />
+    <!-- <div class="col-md-4 input-group">
+      <input type="search" placeholder="Search" id="myInput" class="navbar-right border-right-0 border" name="search" [(ngModel)]="searchText"/>
       <span class="input-group-append">
-        <button
-          class="btn btn-outline-secondary border-left-0 border"
-          type="button"
-        >
+        <button class="btn btn-outline-secondary border-left-0 border" type="button">
           <i class="fa fa-search"></i>
         </button>
       </span>
-    </div>
+    </div> -->
+    <div class="form-group has-search col-md-3">
+      <input type="text" class="form-control"  name="search"
+      [(ngModel)]="searchText"
+      autocomplete="off"
+      placeholder="Filter Customers:">
+      <span class="fa fa-search form-control-feedback"></span>
+  </div>
   </div>
   <br />
 

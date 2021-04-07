@@ -21,3 +21,17 @@ a:hover, a:focus {
 .navbar .nav > .nav-item > a.active {
   color: black
 }
+
+.has-search .form-control-feedback {
+  position: relative;
+  z-index: 2;
+  display: block;
+  width: 2.375rem;
+  height: 2.375rem;
+  line-height: 2.375rem;
+  text-align: center;
+  pointer-events: none;
+  color: #aaa;
+  float: right;
+  bottom: 39px;
+}

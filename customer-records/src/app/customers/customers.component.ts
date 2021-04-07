@@ -50,7 +50,6 @@ export class CustomersComponent implements OnInit {
     this.searchcriteria.emit(this.searchText);
 }
   getCustomersData() {
-    debugger;
     this.dataStorageService.getCustomers()
       .subscribe((responseData: Customer[]) => {
         this.customers = this.filteredCustomers = responseData});

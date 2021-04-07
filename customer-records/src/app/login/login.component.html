@@ -3,7 +3,7 @@
     <h3><span class="fa fa-lock"></span>&nbsp;&nbsp;Authenticate</h3>
   </header>
   <br />
-  <form #f="ngForm" (ngSubmit)="onSubmit()">
+  <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
     <div class="container">
       <div class="row form-group">
         <label for="email" class="col-md-2">Email:</label>
@@ -31,10 +31,10 @@
       </div>
       <br />
       <div>
-        <button
+        <button id="submit"
           class="btn btn-dark"
           type="submit"
-          [disabled]="!f.valid"
+          [disabled]="!loginForm.valid"
         >
           {{ isLoginMode ? "Login" : "Sign Up" }}
         </button>

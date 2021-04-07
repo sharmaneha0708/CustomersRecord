@@ -3,7 +3,9 @@ import { CommonModule } from '@angular/common';
 
 import { CustomersRoutingModule } from './customers-routing.module';
 import { FilterPipe} from '../shared/pipes/filter.pipe';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
@@ -14,7 +16,9 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     FormsModule,
-    CustomersRoutingModule
+    HttpClientModule,
+    CustomersRoutingModule,
+    Ng2SearchPipeModule
   ],
 
 })

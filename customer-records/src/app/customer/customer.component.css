@@ -21,3 +21,7 @@ a:hover, a:focus {
 .navbar .nav > .nav-item > a.active {
   color: black
 }
+
+.anchor_style {
+  cursor: pointer;
+}

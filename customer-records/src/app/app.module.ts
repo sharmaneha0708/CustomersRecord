@@ -10,11 +10,14 @@ import { CustomerModule } from './customer/customer.module';
 import { AboutModule } from './about/about.module';
 import { LoginModule } from './login/login.module';
 import { AlertModule } from './shared/alert/alert.module';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { DropdownDirective } from './shared/dropdown.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    DropdownDirective
   ],
   imports: [
     BrowserModule,
@@ -26,6 +29,7 @@ import { AlertModule } from './shared/alert/alert.module';
     LoginModule,
     AlertModule
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent]
 

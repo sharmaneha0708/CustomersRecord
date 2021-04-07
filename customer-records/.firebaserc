@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "customer-records-3867b": {
+      "hosting": {
+        "customer-records": [
+          "customer-records-3867b"
+        ]
+      }
+    }
+  }
+}

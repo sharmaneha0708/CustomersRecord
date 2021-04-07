@@ -13,7 +13,7 @@
   </tr>
 </thead>
 <tbody>
-  <tr *ngFor="let customer of customers">
+  <tr class="customerData" *ngFor="let customer of customers">
     <td><img src="assets/images/{{ customer.gender }}.svg" alt="Customer Image" class="img-responsive grid-image"></td>
     <td class="align-data"><a class="highlight" (click)="onCustomerClick(customer.id)">
       {{ customer.firstName }}
@@ -24,8 +24,7 @@
     <td class="align-data">{{ customer.state }}</td>
   </tr>
   <tr *ngIf="!customers.length">
-    No Records Found
-  </tr>
+    No Records Found  </tr>
   </tbody>
 </table>
    </div>

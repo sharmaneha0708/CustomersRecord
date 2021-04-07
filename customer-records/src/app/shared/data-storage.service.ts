@@ -9,7 +9,7 @@ import { throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class DataStorageService {
-
+  customersUrl = 'https://customer-records-3867b-default-rtdb.firebaseio.com//customers';
   constructor(
     private http: HttpClient
   ) {}
@@ -17,9 +17,7 @@ export class DataStorageService {
 
   getCustomers() {
      return this.http
-      .get<Customer[]>(
-        'https://customer-records-3867b-default-rtdb.firebaseio.com//customers.json'
-      )
+      .get<Customer[]>(`${this.customersUrl}.json`)
       .pipe(map((responseData) => {
         debugger;
         const keys = [];
@@ -34,52 +32,31 @@ export class DataStorageService {
   }
 
   getCustomer(id: string) {
-    debugger;
     return this.http
-      .get<Customer>(
-        'https://customer-records-3867b-default-rtdb.firebaseio.com//customers/' +
-          id +
-          '.json'
-      )
+      .get<Customer>(`${this.customersUrl}/${id}.json`)
       .pipe(catchError(this.handleError));
   }
 
   addCustomer(customer: Customer) {
     return this.http
-      .post<{name:string}>(
-        'https://customer-records-3867b-default-rtdb.firebaseio.com//customers.json',
-        customer
-      )
+      .post<{name:string}>(`${this.customersUrl}.json`, customer)
       .pipe(catchError(this.handleError));
   }
 
   updateCustomer(customer: Customer, id: string) {
-    debugger;
     return this.http
-      .put<Customer>(
-        'https://customer-records-3867b-default-rtdb.firebaseio.com//customers/' +
-          id +
-          '.json',
-        customer
-      )
+      .put<Customer>(`${this.customersUrl}/${id}.json`, customer)
       .pipe(map(response => response),
         catchError(this.handleError));
   }
 
     deleteCustomer(id: string) {
-      debugger;
       return this.http
-        .delete<Customer>(
-          'https://customer-records-3867b-default-rtdb.firebaseio.com//customers/' +
-            id +
-            '.json',
-
-        )
+        .delete<Customer>(`${this.customersUrl}/${id}.json`)
         .pipe(catchError(this.handleError));
   }
 
   private handleError(errorRes: HttpErrorResponse) {
-    debugger;
     let errorMessage = 'An unknown error occurred!';
     if (!errorRes.error || !errorRes.error.error) {
       return throwError(errorMessage);

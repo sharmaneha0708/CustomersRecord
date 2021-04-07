@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AuthResponseData, LoginService } from './login.service';
+import { LoginService } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   isLoginMode = false;
   alertMessage: string = null;
-  @ViewChild('f', { static: false }) loginForm: NgForm;
+  @ViewChild('loginForm', { static: false }) loginForm: NgForm;
 
   constructor(private loginService: LoginService, private router: Router, private route: ActivatedRoute) { }
 
@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   onSwitchMode() {
     this.isLoginMode = !this.isLoginMode;
   }
+
   onSubmit() {
     if(!this.loginForm.valid) {
       return ;
@@ -65,4 +66,5 @@ export class LoginComponent implements OnInit {
   dismissAlert() {
     this.alertMessage = null;
   }
+
 }

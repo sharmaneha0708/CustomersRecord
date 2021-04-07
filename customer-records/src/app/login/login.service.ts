@@ -1,5 +1,6 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { EventEmitter, Injectable, Output } from '@angular/core';
+//import { AngularFireAuth } from "@angular/fire/auth";
 import { throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
@@ -13,51 +14,80 @@ export interface AuthResponseData {
 }
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class LoginService {
+export class LoginService  {
 
   isAuthenticated = false;
   redirectUrl: string;
+  private tokenExpirationTimer: any;
+
   @Output() authChanged: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   private userAuthChanged(status: boolean) {
     this.authChanged.emit(status);
- }
-
-  signUp(email: string, password: string) {
-    return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDrF2Y7b__-2r4uN1DztDe0bgCc_4gCeYQ',
-    {
-      email: email,
-      password: password,
-      returnSecureToken: true
-    }).pipe(
-      map(responseData => {
-        this.isAuthenticated = responseData.registered;
-        this.userAuthChanged(responseData.registered);
-        return responseData.registered;
-    }),
-      catchError(this.handleError)
-    )
   }
 
-  logIn(email: string, password: string) {
-     return this.http.post<AuthResponseData>('https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDrF2Y7b__-2r4uN1DztDe0bgCc_4gCeYQ',
-      {
-        email: email,
-        password: password,
-        returnSecureToken: true
-      }).pipe(
-        map(responseData => {
+
+  signUp(email: string, password: string) {
+    return this.http
+      .post<AuthResponseData>(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDrF2Y7b__-2r4uN1DztDe0bgCc_4gCeYQ',
+        {
+          email: email,
+          password: password,
+          returnSecureToken: true,
+        }
+      )
+      .pipe(
+        map((responseData) => {
+          this.autoLogOut(+responseData.expiresIn * 1000);
           this.isAuthenticated = responseData.registered;
           this.userAuthChanged(responseData.registered);
           return responseData.registered;
-      }),
+        }),
         catchError(this.handleError)
+      );
+  }
+
+  logIn(email: string, password: string) {
+    return this.http
+      .post<AuthResponseData>(
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDrF2Y7b__-2r4uN1DztDe0bgCc_4gCeYQ',
+        {
+          email: email,
+          password: password,
+          returnSecureToken: true,
+        }
       )
+      .pipe(
+        map((responseData) => {
+          this.autoLogOut(+responseData.expiresIn * 1000);
+          this.isAuthenticated = responseData.registered;
+          this.userAuthChanged(responseData.registered);
+          return responseData.registered;
+        }),
+        catchError(this.handleError)
+      );
+  }
+
+  logOut() {
+   // this.user.next(null);
+   // localStorage.removeItem('userData');
+   debugger;
+    if(this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+      this.tokenExpirationTimer = null;
     }
+  }
+
+  autoLogOut(expirationDuration: number) {
+    this.tokenExpirationTimer = setTimeout(() => {
+       this.logOut();
+     }, expirationDuration);
+   }
 
 
   private handleError(errorRes: HttpErrorResponse) {
@@ -79,4 +109,5 @@ export class LoginService {
     }
     return throwError(errorMessage);
   }
+
 }
